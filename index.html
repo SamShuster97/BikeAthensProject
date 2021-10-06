@@ -113,7 +113,7 @@
                         <td colspan="2">' + (feature.properties['stop_desc'] !== null ? autolinker.link(feature.properties['stop_desc'].toLocaleString()) : '') + '</td>\
                     </tr>\
                 </table>';
-            layer.bindPopup(popupContent, {maxHeight: 400});
+            layer.bindPopup(popupContent, {maxHeight: 300});
         }
 
         function style_BusStops_1_0() {
@@ -197,7 +197,7 @@
                     </tr>\
                     <tr>\
                 </table>';
-            layer.bindPopup(popupContent, {maxHeight: 400});
+            layer.bindPopup(popupContent, {maxHeight: 300});
         }
 
         function style_Athens_draft_bike_routes_2_0(feature) {
@@ -246,20 +246,7 @@
                 pane: 'pane_Athens_draft_bike_routes_2',
                 opacity: 1,
                 color: 'rgba(255,1,1,1.0)',
-                dashArray: '10,5',
-                lineCap: 'square',
-                lineJoin: 'bevel',
-                weight: 4.0,
-                fillOpacity: 0,
-                interactive: true,
-            }
-                    break;
-                default:
-                    return {
-                pane: 'pane_Athens_draft_bike_routes_2',
-                opacity: 1,
-                color: 'rgba(142,24,215,1.0)',
-                dashArray: '',
+                dashArray: '20,10',
                 lineCap: 'square',
                 lineJoin: 'bevel',
                 weight: 3.0,
@@ -421,7 +408,7 @@
                         <td colspan="2">' + (feature.properties['Angle2'] !== null ? autolinker.link(feature.properties['Angle2'].toLocaleString()) : '') + '</td>\
                     </tr>\
                 </table>';
-            layer.bindPopup(popupContent, {maxHeight: 400});
+            layer.bindPopup(popupContent, {maxHeight: 300});
         }
 
         function style_draftroutes_slopechange15copy_3_0() {
@@ -483,7 +470,7 @@
                         <td colspan="2">Trail Network: ' + (feature.properties['Network'] !== null ? autolinker.link(feature.properties['Network'].toLocaleString()) : '') + '</td>\
                     </tr>\
                 </table>';
-            layer.bindPopup(popupContent, {maxHeight: 400});
+            layer.bindPopup(popupContent, {maxHeight: 300});
         }
 
         function style__2020_GNP_4_0(feature) {
@@ -598,7 +585,7 @@
                         <td colspan="2">Lon: ' + (feature.properties['lon'] !== null ? autolinker.link(feature.properties['lon'].toLocaleString()) : '') + '</td>\
                     </tr>\
                 </table>';
-            layer.bindPopup(popupContent, {maxHeight: 400});
+            layer.bindPopup(popupContent, {maxHeight: 300});
         }
 
         function style_POI_WebMapPOI_WebMap1_5_0() {
