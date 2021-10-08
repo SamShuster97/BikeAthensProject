@@ -1,2 +1,2 @@
 # BikeAthensProject
-bit.ly/BikeAthens
+www.bit.ly/BikeAthens
