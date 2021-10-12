@@ -1,3 +1,4 @@
-**Interactive Map of the Best Cycling Routes in Athens, Georgia**
+# BikeAthens
+Interactive Web Map of the Preferred Cycling Routes through Athens, GA
 
 www.bit.ly/BikeAthens
