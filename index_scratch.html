@@ -8,16 +8,70 @@
         <meta name="apple-mobile-web-app-capable" content="yes">
         <link rel="stylesheet" href="css/leaflet.css"><link rel="stylesheet" href="css/L.Control.Locate.min.css">
         <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="sidebar-v2/css/leaflet-sidebar.css">
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
         <style>
+        /* Below are the height and width parameters for the map */
         #map {
             width: "100%";
-            height: 720px;
+            height: 700px;
         }
         </style>
         <title></title>
     </head>
     <body>
         <div id="map">
+            <div id="side-bar" class="col-md-3">
+                <button id="btnLocate" class="btn btn-primary btn-block">Locate</button></div><br>
+                <div id="legend">
+                    <h4 class="text-center" style="font-family:sans-serif">Legend: </h4>
+                    <svg height="150", width="100%">
+                        <line x1="10" y1="10" x2="40" y2="10" style="stroke:rgba(26,150,65,1.0); stroke-width:2;"/>
+                        <text x="50" y="15" style="font-family:sans-serif; font-size:16px">Strongly Preferred</text>
+                        <line x1="10" y1="40" x2="40" y2="40" style="stroke:rgba(166,217,106,1.0); stroke-width:2;"/>
+                        <text x="50" y="45" style="font-family:sans-serif; font-size:16px">Preferred</text>
+                        <line x1="10" y1="70" x2="40" y2="70" style="stroke:rgba(253,174,97,1.0); stroke-width:2;"/>
+                        <text x="50" y="75" style="font-family:sans-serif; font-size:16px">Use with Caution</text>
+                        <line x1="10" y1="100" x2="40" y2="100" style="stroke:rgba(255,1,1,1.0); stroke-width:2; stroke-dasharray: 5, 5"/>
+                        <text x="50" y="105" style="font-family:sans-serif; font-size:16px">Use ONLY when Necessary</text>
+                    </svg>
+                </div> 
+            </div>
+        </div>
+        <div id="side-bar" class="col-md-3">
+            <button id="btnLocate" class="btn btn-primary btn-block">Locate</button></div><br>
+            <div id="legend">
+                <h4 class="text-center" style="font-family:sans-serif">Legend: </h4>
+                <svg height="150", width="100%">
+                    <line x1="10" y1="10" x2="40" y2="10" style="stroke:rgba(26,150,65,1.0); stroke-width:2;"/>
+                    <text x="50" y="15" style="font-family:sans-serif; font-size:16px">Strongly Preferred</text>
+                    <line x1="10" y1="40" x2="40" y2="40" style="stroke:rgba(166,217,106,1.0); stroke-width:2;"/>
+                    <text x="50" y="45" style="font-family:sans-serif; font-size:16px">Preferred</text>
+                    <line x1="10" y1="70" x2="40" y2="70" style="stroke:rgba(253,174,97,1.0); stroke-width:2;"/>
+                    <text x="50" y="75" style="font-family:sans-serif; font-size:16px">Use with Caution</text>
+                    <line x1="10" y1="100" x2="40" y2="100" style="stroke:rgba(255,1,1,1.0); stroke-width:2; stroke-dasharray: 5, 5"/>
+                    <text x="50" y="105" style="font-family:sans-serif; font-size:16px">Use ONLY when Necessary</text>
+                </svg>
+            </div> 
+        </div>
+        <div id="map" class="sidebar-map"></div>
+        <div id="sidebar" class="sidebar collapsed">
+        </div>
+        <div class="sidebar-tabs">
+            <ul role="tablist">
+              <li><a href="#home" role="tab"><i class="fa fa-bars"></i></a></li>
+            </ul>
+        </div>
+          <!-- tab panes -->
+        <div class="sidebar-content">
+            <div class="sidebar-pane" id="home">
+            <h1 class="sidebar-header" style="font-family: sans-serif;">
+                Legend:
+                <span class="sidebar-close"><i class="fa fa-caret-left"></i></span>
+            </h1>
+
+            <p style="font-family: sans-serif;">Elements:</p>
+            </div>
         </div>
         <script src="js/qgis2web_expressions.js"></script>
         <script src="js/leaflet.js"></script><script src="js/L.Control.Locate.min.js"></script>
@@ -33,6 +87,7 @@
         <script src="data/draftroutes_slopechange15copy_3.js"></script>
         <script src="data/_2020_GNP_4.js"></script>
         <script src="data/POI_WebMapPOI_WebMap1_5.js"></script>
+        <script src=""></script>
         <script>
         var highlightLayer;
         function highlightFeature(e) {
@@ -51,7 +106,7 @@
         }
         var map = L.map('map', {
             zoomControl:true, maxZoom:28, minZoom:1
-        }).fitBounds([[33.92,-83.38],[33.97,-83.34524013213455]]);
+        }).setView([33.92,-83.4], 18);
         var hash = new L.Hash(map);
         map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
         var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
@@ -68,7 +123,7 @@
             minZoom: 1,
             maxZoom: 28,
             minNativeZoom: 0,
-            maxNativeZoom: 20
+            maxNativeZoom: 19
         });
         layer_MapboxStreetsv10_0;
         map.addLayer(layer_MapboxStreetsv10_0);
@@ -99,9 +154,6 @@
                     </tr>\
                     <tr>\
                         <td colspan="2">Lon: ' + (feature.properties['stop_lon'] !== null ? autolinker.link(feature.properties['stop_lon'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['stop_url'] !== null ? autolinker.link(feature.properties['stop_url'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <td colspan="2">Stop ID: ' + (feature.properties['stop_id'] !== null ? autolinker.link(feature.properties['stop_id'].toLocaleString()) : '') + '</td>\
@@ -246,7 +298,7 @@
                 pane: 'pane_Athens_draft_bike_routes_2',
                 opacity: 1,
                 color: 'rgba(255,1,1,1.0)',
-                dashArray: '20,10',
+                dashArray: '5,5,5',
                 lineCap: 'square',
                 lineJoin: 'bevel',
                 weight: 3.0,
@@ -479,7 +531,7 @@
                     return {
                 pane: 'pane__2020_GNP_4',
                 opacity: 1,
-                color: 'rgba(38,115,0,1.0)',
+                color: 'rgba(68,213,205,1.0)',
                 dashArray: '',
                 lineCap: 'square',
                 lineJoin: 'bevel',
@@ -625,6 +677,9 @@
         bounds_group.addLayer(layer_POI_WebMapPOI_WebMap1_5);
         map.addLayer(layer_POI_WebMapPOI_WebMap1_5);
         setBounds();
+        var sidebar = new ol.control.Sidebar({ element: 'sidebar', position: 'left' });
+        map.addControl(sidebar);
         </script>
+        <script type="text/javascript" src="sidebar-v2/js/leaflet-sidebar.js"></script>
     </body>
 </html>
